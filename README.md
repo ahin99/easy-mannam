@@ -30,7 +30,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-브라우저에서 `http://localhost:3000`으로 접속합니다.
+브라우저에서 `http://localhost:3001`로 접속합니다.
 
 ## Supabase 설정
 
@@ -41,7 +41,7 @@ npm run dev
 ```text
 SUPABASE_URL=your-supabase-project-url
 SUPABASE_SECRET_KEY=your-supabase-secret-or-service-role-key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:3001
 ```
 
 `SUPABASE_SECRET_KEY`는 서버에서만 사용합니다. 공개 저장소에 `.env.local`을 커밋하지 마세요.
