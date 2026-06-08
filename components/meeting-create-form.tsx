@@ -16,6 +16,7 @@ export function MeetingCreateForm() {
   const [endDate, setEndDate] = useState("");
   const [created, setCreated] = useState<CreatedMeeting | null>(null);
   const [error, setError] = useState("");
+  const [copyMessage, setCopyMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isValid = useMemo(() => {
@@ -30,6 +31,7 @@ export function MeetingCreateForm() {
 
     setIsSubmitting(true);
     setError("");
+    setCopyMessage("");
 
     const response = await fetch("/api/meetings", {
       method: "POST",
@@ -59,7 +61,8 @@ export function MeetingCreateForm() {
     if (!created) {
       return;
     }
-    await navigator.clipboard.writeText(created.joinUrl);
+    await navigator.clipboard.writeText(`[모일날] 우리 언제 만나? 모일 날짜 정하자\n입장 코드 : ${created.code}\n${created.joinUrl}`);
+    setCopyMessage("초대 문구가 복사되었습니다.");
   }
 
   return (
@@ -126,6 +129,7 @@ export function MeetingCreateForm() {
           <p className="mt-3 text-sm text-ink/70">참여 코드</p>
           <p className="mt-1 text-2xl font-bold tracking-widest text-ink">{created.code}</p>
           <p className="mt-4 break-all rounded-md bg-white px-3 py-3 text-sm text-ink/75">{created.joinUrl}</p>
+          {copyMessage ? <p className="mt-3 text-sm font-semibold text-leaf">{copyMessage}</p> : null}
           <div className="mt-4 flex flex-wrap gap-2">
             <button
               type="button"
